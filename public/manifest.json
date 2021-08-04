@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Cinefilio",
+  "name": "Small web app for movie lovers",
   "icons": [
     {
       "src": "favicon.ico",
