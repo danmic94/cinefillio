@@ -1,12 +1,19 @@
+.row.movies-wrapper {
+  margin-top: 75px;
+}
 .row.movies-wrapper > .movie-card{
   padding-right: 0;
   padding-left:  0;
 }
 
-.card-body .button > svg {
+.card-body > button > svg {
   vertical-align: text-top;
 }
 
 .favourites-text {
   padding-left: 5px;
+}
+
+.movie-card:nth-child(even) {
+  margin-left: 125px;  
 }

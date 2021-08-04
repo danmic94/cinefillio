@@ -1,7 +1,6 @@
 {
     "extends": [
-        "eslint:recommended",
-        "prettier"
+        "eslint:recommended"
     ],
     "rules": {
         "react/prop-types": 0,
@@ -17,7 +16,8 @@
     },
     "env": {
         "es6": true,
-        "browser": true
+        "browser": true,
+        "node": true
     },
     "settings": {
         "react": {

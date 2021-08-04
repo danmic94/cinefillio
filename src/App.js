@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import "./App.css";
 import "./components/Movie/Movie";
 import Movie from "./components/Movie/Movie";
@@ -24,20 +24,27 @@ function App() {
   }
 
   return (
-    <div className="App container">
-      <div className="row movies-wrapper">
-        {response.map((movie) => {
-          return (
-            <Movie
-              src={movie.Poster}
-              description="Small description lorem here. This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-              year={movie.Year}
-              key={movie.imdbID}
-            />
-          );
-        })}
+    <Fragment>
+      <nav className="navbar sticky-top navbar-light bg-light">
+        <a className="navbar-brand" href="#">
+          Cinefillio
+        </a>
+      </nav>
+      <div className="App container">
+        <div className="row movies-wrapper">
+          {response.map((movie) => {
+            return (
+              <Movie
+                src={movie.Poster}
+                description="Small description lorem here. This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                year={movie.Year}
+                key={movie.imdbID}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
