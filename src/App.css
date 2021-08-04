@@ -1,5 +1,5 @@
-.row.movies-wrapper {
-  margin-top: 75px;
+.app {
+  margin-top: 25px;
 }
 .row.movies-wrapper > .movie-card{
   padding-right: 0;
@@ -16,4 +16,14 @@
 
 .movie-card:nth-child(even) {
   margin-left: 125px;  
+}
+
+.card.movie-card img {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.navbar-brand {
+  margin-left: 25px;
 }

@@ -2,7 +2,7 @@ import placeholder from "./placeholder.jpg";
 
 function Movie(props) {
   return (
-    <div className="card mb-3 movie-card" style={{ maxWidth: "540px" }}>
+    <div className="card mb-3 movie-card" style={{ maxWidth: "540px" }} >
       <div className="row g-0">
         <div className="col-md-4">
           <img
@@ -18,7 +18,14 @@ function Movie(props) {
             <p className="card-text">
               <small className="text-muted">Year of relase: {props.year}</small>
             </p>
-            <button type="button" className="btn btn-success">
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => {
+                console.log(props.movieObj);
+                console.log("These are the props:", props);
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
