@@ -8,6 +8,7 @@ function SearchFields(props) {
   const [searchedTitle, setSearchedTitle] = useState("war");
   const [searchedYear, setSearchedYear] = useState("2021");
   const [searchedType, setSearchedType] = useState("movie");
+  const [sortFilters, setFilters] = useState({ titleAsc: true, yearAsc: true });
 
   return (
     <div className="row filters-wrapper">
@@ -66,12 +67,38 @@ function SearchFields(props) {
       </div>
       <div className="col-md-2 offset-md-2 sort-group-wrapper">
         <div className="btn-group">
-          <button type="button" className="btn btn-outline-secondary">
-            <i className="bi bi-sort-up"></i>
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={() => {
+              setFilters({
+                titleAsc: !sortFilters.titleAsc,
+                yearAsc: sortFilters.yearAsc,
+              });
+            }}
+          >
+            <i
+              className={
+                sortFilters.titleAsc ? "bi bi-sort-up" : "bi bi-sort-down"
+              }
+            ></i>
             <span className="sort-text">Title</span>
           </button>
-          <button type="button" className="btn btn-outline-secondary">
-            <i className="bi bi-sort-up"></i>
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={() => {
+              setFilters({
+                titleAsc: sortFilters.titleAsc,
+                yearAsc: !sortFilters.yearAsc,
+              });
+            }}
+          >
+            <i
+              className={
+                sortFilters.yearAsc ? "bi bi-sort-up" : "bi bi-sort-down"
+              }
+            ></i>
             <span className="sort-text">Year</span>
           </button>
         </div>
