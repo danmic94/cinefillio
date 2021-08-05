@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const FavouriteMovieContext = createContext([[], () => {}]);
+const FavouriteMovieContext = createContext();
 
 export default FavouriteMovieContext;

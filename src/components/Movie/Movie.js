@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import FavouriteMovieContext from "../../context/FavouriteMoviesContext";
 import placeholder_hq from "./placeholder_hq.jpg";
 
 function Movie(props) {
+  const context = useContext(FavouriteMovieContext);
+  const { favourites, favouritesIDs, addMovie, removeMovie } = context;
+  const movieIsFavourite = favouritesIDs.includes(props.movieObj.imdbID);
+
   return (
     <div className="card mb-3 movie-card" style={{ maxWidth: "45.25%" }}>
       <div className="row g-0">
@@ -22,10 +28,17 @@ function Movie(props) {
               type="button"
               className="btn btn-success"
               onClick={() => {
-                console.log("test");
+                const { movieObj } = props;
+                if (favouritesIDs.includes(movieObj.imdbID)) {
+                  removeMovie(movieObj);
+                } else {
+                  addMovie(movieObj);
+                }
               }}
             >
-              <i className="bi bi-star"></i>
+              <i
+                className={movieIsFavourite ? "bi bi-star-fill" : "bi bi-star"}
+              ></i>
               <span className="favourites-text">Favourite</span>
             </button>
           </div>

@@ -3,6 +3,7 @@ import "../../App.css";
 import Movie from "../../components/Movie/Movie";
 import NavBar from "../../components/NavBar/NavBar";
 import SearchFields from "../../components/SearchFields/SearchFields";
+import noResult from "./no-result.png";
 // Since the API does not provide description only on a per movie request so I do not want to make 100 requests
 // bulk request option does not exist either sadly :(
 export const loremDescription =
@@ -31,12 +32,11 @@ function Home() {
       method: "GET",
     });
     const json = await res.json();
-    console.log(json.Search);
-    setResponse(json.Search);
-  }
-
-  function addToFavourites(movieObject) {
-    console.log(movieObject);
+    if (json.Response === false) {
+      setResponse([]);
+    } else {
+      setResponse(json.Search);
+    }
   }
 
   const setSearchParams = function (title, year, type) {
@@ -70,7 +70,6 @@ function Home() {
     const sortedMoviesByTitle = titleAsc
       ? copyResponse.sort(compareAsc)
       : copyResponse.sort(compareDesc);
-    debugger;
     setResponse(sortedMoviesByTitle);
   };
 
@@ -112,8 +111,8 @@ function Home() {
           handleYearSort={handleSortByYear}
         />
         <div className="row movies-wrapper">
-          {response.map((movie) => {
-            return (
+          {response && response.length ? (
+            response.map((movie) => (
               <Movie
                 src={movie.Poster}
                 description={loremDescription}
@@ -122,8 +121,12 @@ function Home() {
                 key={movie.imdbID}
                 movieObj={movie}
               />
-            );
-          })}
+            ))
+          ) : (
+            <div className="row movies-wrapper">
+              <img src={noResult}></img>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>
