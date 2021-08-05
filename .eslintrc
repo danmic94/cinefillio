@@ -4,6 +4,7 @@
         "plugin:react/recommended"
     ],
     "rules": {
+        "no-debugger":"off",
         "no-unused-vars": 0,
         "react/prop-types": 0,
         "react/react-in-js-scope": 0,

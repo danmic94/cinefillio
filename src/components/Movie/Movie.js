@@ -1,12 +1,12 @@
-import placeholder from "./placeholder.jpg";
+import placeholder_hq from "./placeholder_hq.jpg";
 
 function Movie(props) {
   return (
-    <div className="card mb-3 movie-card" style={{ maxWidth: "540px" }} >
+    <div className="card mb-3 movie-card" style={{ maxWidth: "45.25%" }} >
       <div className="row g-0">
         <div className="col-md-4">
           <img
-            src={props.src.length < 10 ? placeholder : props.src}
+            src={props.src.length < 10 ? placeholder_hq : props.src}
             className="img-fluid rounded-start"
             alt="movie-poster"
           />

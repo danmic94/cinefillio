@@ -27,3 +27,11 @@
 .navbar-brand {
   margin-left: 25px;
 }
+
+.filters-wrapper {
+  margin-bottom: 25px;
+}
+
+.row.filters-wrapper > div.col-md-2:first-child{
+  padding-left: 0px;
+}
