@@ -35,3 +35,17 @@
 .row.filters-wrapper > div.col-md-2:first-child{
   padding-left: 0px;
 }
+
+.sort-group-wrapper {
+  padding-right: 0px;
+}
+
+.sort-group-wrapper .btn-group {
+  float: right;
+}
+
+.sort-text {
+  font-size: 13px;
+  vertical-align: text-bottom;
+  padding-left: 5px;
+}

@@ -64,6 +64,18 @@ function SearchFields(props) {
           Submit
         </button>
       </div>
+      <div className="col-md-2 offset-md-2 sort-group-wrapper">
+        <div className="btn-group">
+          <button type="button" className="btn btn-outline-secondary">
+            <i className="bi bi-sort-up"></i>
+            <span className="sort-text">Title</span>
+          </button>
+          <button type="button" className="btn btn-outline-secondary">
+            <i className="bi bi-sort-up"></i>
+            <span className="sort-text">Year</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
