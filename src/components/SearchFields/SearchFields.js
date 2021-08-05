@@ -1,16 +1,5 @@
 import { useState } from "react";
-
-function generateArrayOfYears() {
-  var max = new Date().getFullYear();
-  max--;
-  var min = max - 13;
-  var years = [];
-
-  for (var i = max; i >= min; i--) {
-    years.push(i);
-  }
-  return years;
-}
+import { generateArrayOfYears } from "../../helpers";
 
 const years = generateArrayOfYears();
 const types = ["Movie", "Series", "Episode"];
