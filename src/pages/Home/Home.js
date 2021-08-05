@@ -23,9 +23,9 @@ function Home() {
     const api_key = process.env.REACT_APP_OPEN_MOVIE_DB_API_KEY;
     const url =
       process.env.REACT_APP_OPEN_MOVIE_DB_URL +
-      `?apikey=${api_key}` + 
-      `&s=${searchedTitle}` + 
-      `&t=${searchedType}` + 
+      `?apikey=${api_key}` +
+      `&s=${searchedTitle}` +
+      `&t=${searchedType}` +
       `&y=${searchedYear}`;
     const res = await fetch(url, {
       method: "GET",
@@ -39,17 +39,78 @@ function Home() {
     console.log(movieObject);
   }
 
-  var setSearchParams = function (title, year, type) {
+  const setSearchParams = function (title, year, type) {
     setSearchedTitle(title);
     setSearchedYear(year);
     setSearchedType(type);
-  }
+  };
+
+  const handleSortByTitle = function (titleAsc) {
+    const compareAsc = function (a, b) {
+      if (a.Title < b.Title) {
+        return -1;
+      }
+      if (a.Title > b.Title) {
+        return 1;
+      }
+      return 0;
+    };
+
+    const compareDesc = function (a, b) {
+      if (a.Title > b.Title) {
+        return -1;
+      }
+      if (a.Title < b.Title) {
+        return 1;
+      }
+      return 0;
+    };
+
+    let copyResponse = [...response];
+    const sortedMoviesByTitle = titleAsc
+      ? copyResponse.sort(compareAsc)
+      : copyResponse.sort(compareDesc);
+    debugger;
+    setResponse(sortedMoviesByTitle);
+  };
+
+  const handleSortByYear = function (yearAsc) {
+    const compareAsc = function (a, b) {
+      if (a.Year < b.Year) {
+        return -1;
+      }
+      if (a.Year > b.Year) {
+        return 1;
+      }
+      return 0;
+    };
+
+    const compareDesc = function (a, b) {
+      if (a.Year > b.Year) {
+        return -1;
+      }
+      if (a.Year < b.Year) {
+        return 1;
+      }
+      return 0;
+    };
+
+    let copyResponse = [...response];
+    const sortedMoviesByYear = yearAsc
+      ? copyResponse.sort(compareAsc)
+      : copyResponse.sort(compareDesc);
+    setResponse(sortedMoviesByYear);
+  };
 
   return (
     <Fragment>
       <NavBar />
       <div className="app container">
-        <SearchFields handleSearchParams={setSearchParams} />
+        <SearchFields
+          handleSearchParams={setSearchParams}
+          handleTitleSort={handleSortByTitle}
+          handleYearSort={handleSortByYear}
+        />
         <div className="row movies-wrapper">
           {response.map((movie) => {
             return (
@@ -59,7 +120,7 @@ function Home() {
                 title={movie.Title}
                 year={movie.Year}
                 key={movie.imdbID}
-                handleClickFavourite={(addToFavourites)}
+                handleClickFavourite={addToFavourites}
                 movieObj={movie}
               />
             );

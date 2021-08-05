@@ -10,6 +10,13 @@ function SearchFields(props) {
   const [searchedType, setSearchedType] = useState("movie");
   const [sortFilters, setFilters] = useState({ titleAsc: true, yearAsc: true });
 
+  function toggleFilters(title, year) {
+    setFilters({
+      titleAsc: title,
+      yearAsc: year,
+    });
+  }
+
   return (
     <div className="row filters-wrapper">
       <div className="col-md-2">
@@ -71,10 +78,9 @@ function SearchFields(props) {
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              setFilters({
-                titleAsc: !sortFilters.titleAsc,
-                yearAsc: sortFilters.yearAsc,
-              });
+              const { titleAsc, yearAsc } = sortFilters;
+              toggleFilters(!titleAsc, yearAsc);
+              props.handleTitleSort(!titleAsc);
             }}
           >
             <i
@@ -88,10 +94,9 @@ function SearchFields(props) {
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              setFilters({
-                titleAsc: sortFilters.titleAsc,
-                yearAsc: !sortFilters.yearAsc,
-              });
+              const { titleAsc, yearAsc } = sortFilters;
+              toggleFilters(titleAsc, !yearAsc);
+              props.handleYearSort(!yearAsc);
             }}
           >
             <i
