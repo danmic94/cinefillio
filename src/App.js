@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Switch, Redirect, Route } from "react-router-dom";
 import Favourites from "./pages/Favourites/Favourites";
 import Home from "./pages/Home/Home";
 import FavouriteMovieProvider from "./context/FavouriteMoviesProvider";
-import FavouriteMovieContext from "./context/FavouriteMoviesContext";
 
 export default function App() {
   return (
