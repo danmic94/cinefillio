@@ -3,17 +3,17 @@ import "../../App.css";
 import Movie from "../../components/Movie/Movie";
 import NavBar from "../../components/NavBar/NavBar";
 import SearchFields from "../../components/SearchFields/SearchFields";
+// Since the API does not provide description only on a per movie request so I do not want to make 100 requests
+// bulk request option does not exist either sadly :(
+export const loremDescription =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+  " More recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
 function Home() {
   const [response, setResponse] = useState([]);
   const [searchedTitle, setSearchedTitle] = useState("war");
   const [searchedYear, setSearchedYear] = useState("2021");
   const [searchedType, setSearchedType] = useState("movie");
-  // Since the API does not provide description only on a per movie request so I do not want to make 100 requests
-  // bulk request option does not exist either sadly :(
-  const loremDescription =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-    " More recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
   useEffect(() => {
     fetchMovies();
@@ -120,7 +120,6 @@ function Home() {
                 title={movie.Title}
                 year={movie.Year}
                 key={movie.imdbID}
-                handleClickFavourite={addToFavourites}
                 movieObj={movie}
               />
             );
