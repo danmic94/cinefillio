@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cinefillio/static/css/main.e6144bc6.chunk.css",
-    "main.js": "/cinefillio/static/js/main.c29953c3.chunk.js",
-    "main.js.map": "/cinefillio/static/js/main.c29953c3.chunk.js.map",
+    "main.js": "/cinefillio/static/js/main.bace8c31.chunk.js",
+    "main.js.map": "/cinefillio/static/js/main.bace8c31.chunk.js.map",
     "runtime-main.js": "/cinefillio/static/js/runtime-main.304868c1.js",
     "runtime-main.js.map": "/cinefillio/static/js/runtime-main.304868c1.js.map",
     "static/css/2.421b9623.chunk.css": "/cinefillio/static/css/2.421b9623.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.421b9623.chunk.css",
     "static/js/2.a56ca6e4.chunk.js",
     "static/css/main.e6144bc6.chunk.css",
-    "static/js/main.c29953c3.chunk.js"
+    "static/js/main.bace8c31.chunk.js"
   ]
 }
