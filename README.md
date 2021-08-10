@@ -17,4 +17,4 @@
 - [ ] Multi user (local) system
 - [x] Custom styling
 - [x] A favicon
-- [ ] Github pages script and branch
+- [x] Github pages script and branch
