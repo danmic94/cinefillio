@@ -7,10 +7,10 @@ function NavBar() {
       className="navbar sticky-top navbar-light"
       style={{ backgroundColor: "#e3f2fd" }}
     >
-      <Link to="/" className="navbar-brand">
+      <Link to={process.env.PUBLIC_URL + "/"} className="navbar-brand">
         <h4>Cinefillio</h4>
       </Link>
-      <Link to="/favourites" className="nav-link">
+      <Link to={process.env.PUBLIC_URL + "/favourites"} className="nav-link">
         Favourites
       </Link>
     </nav>

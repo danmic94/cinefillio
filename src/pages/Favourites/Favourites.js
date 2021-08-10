@@ -38,7 +38,10 @@ export default function Favourites() {
         <div className="app container">
           <div className="alert alert-warning text-center" role="alert">
             <h3>No favourite movies selected!</h3>
-            <p>Please go back and choose some you like <Link to="/home">here</Link> </p>
+            <p>
+              Please go back and choose some you like{" "}
+              <Link to={process.env.PUBLIC_URL + "/home"}>here</Link>{" "}
+            </p>
           </div>
         </div>
       </Fragment>

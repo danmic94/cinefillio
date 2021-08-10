@@ -10,14 +10,14 @@ export default function App() {
     <SearchParamsProvider>
       <FavouriteMovieProvider>
         <Switch>
-          <Route path="/favourites">
+          <Route path={process.env.PUBLIC_URL + "/favourites"}>
             <Favourites />
           </Route>
-          <Route path="/home">
+          <Route path={process.env.PUBLIC_URL + "/home"}>
             <Home />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
+          <Route exact path={process.env.PUBLIC_URL + "/"}>
+            <Redirect to={process.env.PUBLIC_URL + "/home"} />
           </Route>
         </Switch>
       </FavouriteMovieProvider>
