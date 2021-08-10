@@ -63,19 +63,7 @@ function SearchFields(props) {
           ))}
         </select>
       </div>
-      <div className="col-md-2">
-        <button
-          type="submit"
-          className="btn btn-primary mb-2"
-          onClick={(e) => {
-            e.preventDefault();
-            props.handleSearchParams(searchedTitle, searchedYear, searchedType);
-          }}
-        >
-          Submit
-        </button>
-      </div>
-      <div className="col-md-2 offset-md-2 sort-group-wrapper">
+      <div className="col-md-4 offset-md-2 sort-group-wrapper">
         <div className="btn-group">
           <button
             type="button"

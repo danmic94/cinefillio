@@ -47,12 +47,6 @@ function Home() {
     setResponse(json.Search || []);
   }
 
-  const setSearchParams = function (title, year, type) {
-    setSearchedTitle(title);
-    setSearchedYear(year);
-    setSearchedType(type);
-  };
-
   const handleSortByTitle = function (titleAsc) {
     const compareAsc = function (a, b) {
       if (a.Title < b.Title) {
@@ -117,7 +111,6 @@ function Home() {
       <NavBar />
       <div className="app container">
         <SearchFields
-          handleSearchParams={setSearchParams}
           handleTitleSort={handleSortByTitle}
           handleYearSort={handleSortByYear}
         />
