@@ -1,8 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 import "../../App.css";
 import Movie from "../../components/Movie/Movie";
 import NavBar from "../../components/NavBar/NavBar";
 import SearchFields from "../../components/SearchFields/SearchFields";
+import SearchParamsContext from "../../context/SearchParamsContext";
 import noResult from "./no-result.png";
 // Since the API does not provide description only on a per movie request so I do not want to make 100 requests
 // bulk request option does not exist either sadly :(
@@ -12,9 +13,19 @@ export const loremDescription =
 
 function Home() {
   const [response, setResponse] = useState([]);
-  const [searchedTitle, setSearchedTitle] = useState("war");
-  const [searchedYear, setSearchedYear] = useState("2021");
-  const [searchedType, setSearchedType] = useState("movie");
+  const searchParamsContext = useContext(SearchParamsContext);
+  const {
+    searchedTitle,
+    searchedYear,
+    searchedType,
+    setSearchedTitle,
+    setSearchedYear,
+    setSearchedType,
+  } = searchParamsContext;
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   useEffect(() => {
     fetchMovies();
@@ -22,21 +33,18 @@ function Home() {
 
   async function fetchMovies() {
     const api_key = process.env.REACT_APP_OPEN_MOVIE_DB_API_KEY;
-    const url =
-      process.env.REACT_APP_OPEN_MOVIE_DB_URL +
-      `?apikey=${api_key}` +
-      `&s=${searchedTitle}` +
-      `&t=${searchedType}` +
-      `&y=${searchedYear}`;
+    let url = process.env.REACT_APP_OPEN_MOVIE_DB_URL;
+    url += `?apikey=${api_key}`;
+    url += `&s=${searchedTitle}`;
+    url += `&type=${searchedType}`;
+    if (searchedYear && searchedYear.length) {
+      url += `&y=${searchedYear}`;
+    }
     const res = await fetch(url, {
       method: "GET",
     });
     const json = await res.json();
-    if (json.Response === false) {
-      setResponse([]);
-    } else {
-      setResponse(json.Search);
-    }
+    setResponse(json.Search || []);
   }
 
   const setSearchParams = function (title, year, type) {
@@ -101,6 +109,9 @@ function Home() {
     setResponse(sortedMoviesByYear);
   };
 
+  const responseIsValid =
+    typeof response !== "undefined" && response.length > 0;
+
   return (
     <Fragment>
       <NavBar />
@@ -111,7 +122,7 @@ function Home() {
           handleYearSort={handleSortByYear}
         />
         <div className="row movies-wrapper">
-          {response && response.length ? (
+          {responseIsValid ? (
             response.map((movie) => (
               <Movie
                 src={movie.Poster}

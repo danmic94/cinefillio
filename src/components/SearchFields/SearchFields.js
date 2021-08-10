@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import SearchParamsContext from "../../context/SearchParamsContext";
 import { generateArrayOfYears } from "../../helpers";
 
 const years = generateArrayOfYears();
 const types = ["Movie", "Series", "Episode"];
 
 function SearchFields(props) {
-  const [searchedTitle, setSearchedTitle] = useState("war");
-  const [searchedYear, setSearchedYear] = useState("2021");
-  const [searchedType, setSearchedType] = useState("movie");
-  const [sortFilters, setFilters] = useState({ titleAsc: true, yearAsc: true });
+  const searchParamsContext = useContext(SearchParamsContext);
+  const {
+    searchedTitle,
+    searchedYear,
+    searchedType,
+    titleAsc,
+    yearAsc,
+    setSearchedTitle,
+    setSearchedYear,
+    setSearchedType,
+    toggleFilters,
+  } = searchParamsContext;
 
-  function toggleFilters(title, year) {
-    setFilters({
-      titleAsc: title,
-      yearAsc: year,
-    });
-  }
 
   return (
     <div className="row filters-wrapper">
@@ -38,7 +41,7 @@ function SearchFields(props) {
           value={searchedYear}
           onChange={(e) => setSearchedYear(e.target.value)}
         >
-          <option value="2021">2021</option>
+          <option value=""> - No year - </option>
           {years.map((year) => (
             <option value={year} key={year}>
               {year}
@@ -78,14 +81,13 @@ function SearchFields(props) {
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              const { titleAsc, yearAsc } = sortFilters;
               toggleFilters(!titleAsc, yearAsc);
               props.handleTitleSort(!titleAsc);
             }}
           >
             <i
               className={
-                sortFilters.titleAsc ? "bi bi-sort-up" : "bi bi-sort-down"
+                titleAsc ? "bi bi-sort-up" : "bi bi-sort-down"
               }
             ></i>
             <span className="sort-text">Title</span>
@@ -94,14 +96,13 @@ function SearchFields(props) {
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              const { titleAsc, yearAsc } = sortFilters;
               toggleFilters(titleAsc, !yearAsc);
               props.handleYearSort(!yearAsc);
             }}
           >
             <i
               className={
-                sortFilters.yearAsc ? "bi bi-sort-up" : "bi bi-sort-down"
+                yearAsc ? "bi bi-sort-up" : "bi bi-sort-down"
               }
             ></i>
             <span className="sort-text">Year</span>

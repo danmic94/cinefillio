@@ -1,6 +1,5 @@
 function generateArrayOfYears() {
   var max = new Date().getFullYear();
-  max--;
   var min = max - 13;
   var years = [];
 
