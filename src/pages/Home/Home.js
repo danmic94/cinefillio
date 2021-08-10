@@ -13,15 +13,9 @@ export const loremDescription =
 
 function Home() {
   const [response, setResponse] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const searchParamsContext = useContext(SearchParamsContext);
-  const {
-    searchedTitle,
-    searchedYear,
-    searchedType,
-    setSearchedTitle,
-    setSearchedYear,
-    setSearchedType,
-  } = searchParamsContext;
+  const { searchedTitle, searchedYear, searchedType } = searchParamsContext;
 
   useEffect(() => {
     fetchMovies();
@@ -40,10 +34,15 @@ function Home() {
     if (searchedYear && searchedYear.length) {
       url += `&y=${searchedYear}`;
     }
+    setLoading(true);
+    setTimeout(() => {
+      console.log("simulate some waiting");
+    }, 6000);
     const res = await fetch(url, {
       method: "GET",
     });
     const json = await res.json();
+    setLoading(false);
     setResponse(json.Search || []);
   }
 
@@ -103,20 +102,57 @@ function Home() {
     setResponse(sortedMoviesByYear);
   };
 
-  const responseIsValid =
-    typeof response !== "undefined" && response.length > 0;
+  const responseIsValid = !isLoading && response && response.length;
+  const noResults =
+    !isLoading && (typeof response === "undefined" || response.length === 0);
 
-  return (
-    <Fragment>
-      <NavBar />
-      <div className="app container">
-        <SearchFields
-          handleTitleSort={handleSortByTitle}
-          handleYearSort={handleSortByYear}
-        />
-        <div className="row movies-wrapper">
-          {responseIsValid ? (
-            response.map((movie) => (
+  if (isLoading) {
+    return (
+      <Fragment>
+        <NavBar />
+        <div className="app container">
+          <SearchFields
+            handleTitleSort={handleSortByTitle}
+            handleYearSort={handleSortByYear}
+          />
+          <div className="row movies-wrapper">
+            <div className="spinner-border text-primary loader" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
+  if (noResults) {
+    return (
+      <Fragment>
+        <NavBar />
+        <div className="app container">
+          <SearchFields
+            handleTitleSort={handleSortByTitle}
+            handleYearSort={handleSortByYear}
+          />
+          <div className="row movies-wrapper">
+            <img src={noResult}></img>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
+  if (responseIsValid) {
+    return (
+      <Fragment>
+        <NavBar />
+        <div className="app container">
+          <SearchFields
+            handleTitleSort={handleSortByTitle}
+            handleYearSort={handleSortByYear}
+          />
+          <div className="row movies-wrapper">
+            {response.map((movie) => (
               <Movie
                 src={movie.Poster}
                 description={loremDescription}
@@ -125,16 +161,12 @@ function Home() {
                 key={movie.imdbID}
                 movieObj={movie}
               />
-            ))
-          ) : (
-            <div className="row movies-wrapper">
-              <img src={noResult}></img>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
-    </Fragment>
-  );
+      </Fragment>
+    );
+  }
 }
 
 export default Home;

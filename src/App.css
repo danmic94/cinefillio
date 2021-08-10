@@ -49,3 +49,10 @@
   vertical-align: text-bottom;
   padding-left: 5px;
 }
+
+.loader {
+  width: 20rem;
+  height: 20rem;
+  margin: 0 auto;
+  margin-top: 20%;
+}
